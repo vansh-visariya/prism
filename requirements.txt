@@ -1,0 +1,11 @@
+# Unified runtime dependencies for the full hackathon simulation
+# Covers:
+# - bank_churn_env server + inference
+# - retention_strategy server runtime compatibility
+
+openenv-core[core]>=0.2.2
+fastapi>=0.115.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+requests>=2.28.0
+openai>=1.0.0
