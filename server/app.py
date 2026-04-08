@@ -75,7 +75,9 @@ async def health():
 
 
 @app.post("/reset")
-async def reset(request: ResetRequest):
+async def reset(request: Optional[ResetRequest] = None):
+    if request is None:
+        request = ResetRequest()
     global _active_task
     _active_task = request.task_id
 
@@ -118,7 +120,12 @@ async def step(request: Request):
     Task 3 (ACRE) expects OutreachAction fields:
       {offer_type, discount_percentage, cashback_amount}
     """
-    body = await request.json()
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+
+    from pydantic import ValidationError
 
     if _active_task in (1, 2):
         try:
@@ -130,6 +137,8 @@ async def step(request: Request):
                 "done": done,
                 "info": info,
             }
+        except ValidationError as e:
+            raise HTTPException(status_code=422, detail=e.errors())
         except RuntimeError as e:
             raise HTTPException(status_code=400, detail=str(e))
         except Exception as e:
@@ -164,6 +173,8 @@ async def step(request: Request):
                 "done": done,
                 "info": info,
             }
+        except ValidationError as e:
+            raise HTTPException(status_code=422, detail=e.errors())
         except RuntimeError as e:
             raise HTTPException(status_code=400, detail=str(e))
         except Exception as e:
