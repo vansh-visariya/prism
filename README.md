@@ -1,20 +1,4 @@
----
-title: META SCALER – AI Banking Retention Sandbox
-emoji: 🏦
-colorFrom: blue
-colorTo: green
-sdk: docker
-pinned: false
-app_port: 7860
-tags:
-  - openenv
-  - reinforcement-learning
-  - banking
-  - customer-retention
-  - hackathon
----
-
-# META SCALER — AI Banking Retention Sandbox
+# PRISM — AI Banking Retention Sandbox
 
 An end-to-end autonomous agent evaluation environment for **banking customer retention**. Built on Meta's [OpenEnv](https://github.com/meta-pytorch/openenv) framework, this sandbox chains three interconnected tasks into a unified pipeline — from churn prediction to campaign resolution to personalized outreach.
 
