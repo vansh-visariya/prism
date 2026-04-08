@@ -167,7 +167,7 @@ def grade_hard_task(history: EpisodeHistory) -> GradeResult:
     )
     
     return GradeResult(
-        score=round(final_score, 3),
+        score=round(max(0.01, min(0.99, final_score)), 3),
         passed=passed,
         breakdown=breakdown,
         feedback=feedback

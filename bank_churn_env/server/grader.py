@@ -33,10 +33,10 @@ def grade_task1(episode_results):
     ]
     base_score -= len(dangerous_misses) * 0.20
 
-    return round(max(0.0, min(1.0, base_score)), 4)
+    return round(max(0.01, min(0.99, base_score)), 4)
 
 
-def grade_task_2(
+def _grade_task_2_internal(
     working_dir: str = ".", campaign_file_paths: dict | None = None
 ) -> float:
     output_path = os.path.join(working_dir, "master_campaign_deployment.json")
@@ -151,6 +151,11 @@ def grade_task_2(
         return 0.5
 
     return 1.0
+
+
+def grade_task_2(working_dir: str = ".", campaign_file_paths: dict | None = None) -> float:
+    score = _grade_task_2_internal(working_dir, campaign_file_paths)
+    return float(max(0.01, min(0.99, score)))
 
 
 def get_task2_expected_map(
